@@ -1,0 +1,88 @@
+<!--templates/user/signup/main-template-->
+
+<div class="signup-form">
+
+  <a href="/#">
+    <h1 class="logo ir">
+      Tag:cmd
+    </h1>
+  </a>
+
+  <div class="well">
+
+    <div class="page-header">
+      <h1>{{ localise "signUpTitle" }}</h1>
+      <span class="feedbackLink pull-right">
+        <a href="https://www.surveymonkey.com/s/v5-alpha" target="_blank">
+          {{ localise "feedback" }}
+        </a>
+      </span>
+    </div>
+
+    <p>{{ localise "signUpTitleAddn" }}</p>
+    <form class="form-horizontal">
+      <div class="alert alert-error hide" data-type="form-alerts"></div>
+      <fieldset>
+        <legend>{{ localise "aboutYou"}}</legend>
+        <div class="control-group">
+          <label class="control-label" for="signup-name">{{ localise "name" }}</label>
+          <div class="controls">
+            <div id="signup-name" name="name">
+              <fieldset>
+                <div class="control-group pull-left" style="margin: 0 10px 0 0;">
+                  <div>
+                    <input id="signup-form--firstName" name="signup-form--firstName" classname="input-medium" data-original-title="{{ localise "firstNameEmpty" }}" data-placement="top" type="text" class="input-medium" maxlength="200" autocomplete="off" autocapitalize="off">
+                    <p class="help-block">{{ localise "firstName" }}</p>
+                  </div>
+                </div>
+                <div class="control-group span2 pull-left" styl="margin: 0 25px 0 0;">
+                  <div>
+                    <input id="signup-form--lastName" name="signup-form--lastName" classname="input-medium" data-original-title="{{ localise "lastNameError"}}" data-placement="top" type="text" class="input-medium" maxlength="200" autocomplete="off" autocapitalize="off">
+                    <p class="help-block">{{ localise "lastName" }}</p>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        {{ loadFormPartials "forms/input-control-group" "email"
+          "formLabel:emailAddress"
+          "className:input-xlarge"
+          "hint:emailError"
+          "help:emailHelp"
+          "controls:true"
+        }}
+      </fieldset>
+      <fieldset>
+        <legend>{{ localise "yourAccount"}}</legend>
+        {{ loadFormPartials "forms/input-control-group" "userName"
+          "formLabel:userName"
+          "className:input-xlarge"
+          "hint:usernameError"
+          "help:usernameHelp"
+          "controls:true"
+        }}
+        {{ loadFormPartials "forms/input-control-group" "password"
+          "type:password"
+          "formLabel:password"
+          "className:input-medium"
+          "hint:passwordEmpty"
+          "help:passwordErrorExt"
+          "controls:true"
+        }}
+        {{ loadFormPartials "forms/input-control-group" "passwordConfirm"
+          "type:password"
+          "formLabel:passwordConfirm"
+          "className:input-medium"
+          "controls:true"
+        }}
+      </fieldset>
+      <div class="form-actions">
+        <button class="btn btn-primary " data-loading-text="{{ localise "loading" }}...">
+          <i class=" "></i>{{ localise "signUp" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

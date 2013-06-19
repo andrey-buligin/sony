@@ -1,0 +1,9 @@
+{
+  "name": "less-elements",
+  "version": "0.0.0",
+  "commit": "191754c0ec5fc054bba9117e76f3ee129c1d4bd7",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmitryf/elements.git"
+  }
+}

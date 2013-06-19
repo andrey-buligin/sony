@@ -1,0 +1,28 @@
+<!--templates/user/signup/success-template-->
+
+<div class="signup-form">
+
+  <a href="/#">
+    <h1 class="logo ir">
+      Tag:cmd
+    </h1>
+  </a>
+
+  <div class="well">
+    <div class="page-header">
+      <h1>{{ localise "signupSuccessHeading" }}</h1>
+    </div>
+    <p> {{ localise "signupSuccessInstruction" }}</p>
+    <ol>
+      <li>
+        <del>{{ localise "providePersonalDetails" }}</del> <i class="icon-ok"></i> {{ localise "done" }}!
+      </li>
+      <li>
+        <del>{{ localise "verifyAccountEmail" }} <em title="{{data.email}}">{{ truncate data.email 35 "..."}}</em></del> <i class="icon-ok"></i> {{ localise "done" }}!
+      </li>
+      <li>
+        <b><a href="/#">{{ localise "signIn" }}</a> {{ localise "detailsChosen"}}</b>
+      </li>
+    </ol>
+  </div>
+</div>

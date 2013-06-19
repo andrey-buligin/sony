@@ -1,0 +1,26 @@
+[{
+	"icon": "images/icon-yes.png",
+	"background": "black",
+	"className": "smallOffset",
+	"text": "DEF"
+},{
+	"icon": "images/icon-yes.png",
+	"background": "red",
+	"className": "smallOffset",
+	"text": "GHI"
+},{
+	"icon": "images/icon-hand.png",
+	"background": "orange",
+	"className": "mediumOffset",
+	"text": "JKL"
+},{
+	"icon": "images/icon-hand.png",
+	"background": "blue",
+	"className": "mediumOffset",
+	"text": "MNO"
+},{
+	"icon": "images/icon-dollar.png",
+	"background": "yellow",
+	"className": "black",
+	"text": "ABC"
+}]

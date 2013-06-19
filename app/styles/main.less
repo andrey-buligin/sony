@@ -1,0 +1,48 @@
+/* CSS Vendor Prefixer */
+@import "../bower_components/bootstrap/less/bootstrap";
+@import "../bower_components/less-elements/elements";
+
+/*--------------------------------
+     Variables
+---------------------------------- */
+
+@defaultBg: red;
+@firstBg: #c64918;
+@secondBg: #d37725;
+@thirdBg: #556a70;
+@fourthBg: #55777f;
+@fifthBg: #68a03d;
+
+
+/*--------------------------------
+    Styles
+---------------------------------- */
+
+body {
+	padding: 0;
+	margin: 0;
+    background: #ececec;
+    font-size: 62.5%;
+    line-height: 1.4em;
+}
+
+.container {
+    width: 310px;
+    margin: 0 auto;
+    padding: 25px 10px;
+    .box-sizing();
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+
