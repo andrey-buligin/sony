@@ -4,7 +4,7 @@ define(function() {
 
     var Model = Backbone.Model.extend({
 
-        idAttribute: userId,
+        idAttribute: "userId",
 
         defaults: {
             "firstName": "",

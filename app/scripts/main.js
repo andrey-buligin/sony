@@ -36,8 +36,9 @@ require.config({
 
 require([
     'backbone',
-    'jquery'
-], function (Backbone, $) {
+    'jquery',
+    'scripts/router'
+], function (Backbone, $, Router) {
 
     var app = window.app = {
         config: {
@@ -72,50 +73,6 @@ require([
     // USER - register, sign in, details
     // TITLES - view, add/remove
     // TITLES - full list
-
-    var Router = Backbone.Router.extend({
-        routes: {
-            ""              : "home",
-            "user/register" : "register",
-            "user/profile"  : "profile",
-            "user/login"    : "login",
-            "titles"        : "titles",
-            "titles/:id"    : "titles"
-        },
-
-        checkForAuthorisation: function(){
-            if (!sessionStorage.getItem("sessionId")) {
-                Backbone.history.navigate('/user/login', true);
-            }
-            return true;
-        },
-
-        home: function() {
-            if (this.checkForAuthorisation()) {
-                console.log('homepage');
-            }
-        },
-
-        login: function() {
-            require('modules/user/user', function(User) {
-                $('#content').empty().append(new User.Views.Signin().render().el);
-            });
-        },
-
-        register: function() {
-            require('modules/user/user', function(User) {
-                $('#content').empty().append(new User.Views.Register().render().el);
-            });
-        },
-
-        titles: function(id) {
-            if (this.checkForAuthorisation()) {
-                require('modules/titles/titles', function(Titles) {
-                    console.log('titles page');
-                });
-            }
-        }
-    });
 
     var appRouter = new Router();
     Backbone.history.start();

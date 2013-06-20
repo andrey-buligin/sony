@@ -1,16 +1,16 @@
 define([
-  'modules/user/models/',
-  'hbs!templates/user/signin.html'
+  'hbs!templates/user/signin'
 ],
 
 function(template) {
 
   "use strict";
 
-    SignInView = BaseView.extend({
+    var SignInView = Backbone.View.extend({
 
         render: function(){
             this.$el.html(template());
+            return this;
         },
 
         login: function (e) {

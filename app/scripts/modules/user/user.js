@@ -1,7 +1,7 @@
 define([
-  'modules/user/models/main',
-  'modules/user/views/signin',
-  'modules/user/views/signup'
+  'scripts/modules/user/models/main',
+  'scripts/modules/user/views/signin',
+  'scripts/modules/user/views/signup'
 ],
 
 function (UserModel, SignInView, SignUpView) {
