@@ -25,6 +25,36 @@ function (Backbone) {
             "notes": null
         },
 
+        validation: {
+            username: {
+                required: true,
+                msg: 'Please enter username'
+            },
+            password: {
+                required: true,
+                msg: 'Please enter password'
+            },
+            firstName: {
+                required: true,
+                msg: 'Please enter first name'
+            },
+            lastName: {
+                required: true,
+                msg: 'Please enter last name'
+            },
+            age: {
+                required: true,
+                msg: 'Please enter your age'
+            },
+            phoneNumber: [{
+                required: true,
+                msg: 'Please provide your phone'
+            },{
+                pattern: 'digits',
+                msg: 'Phone number provided is not correct'
+            }]
+        },
+
         initialize: function() {
 
         },

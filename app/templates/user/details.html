@@ -7,6 +7,7 @@
     <p>You can update your account</p>
     <form class="form-horizontal">
         <div class="alert alert-error hide" data-type="form-alerts">Error</div>
+        <div class="alert alert-success hide" data-type="form-alerts">You have successfully updated your information.</div>
 
         <fieldset>
             <legend>About you</legend>
@@ -43,6 +44,30 @@
         </fieldset>
 
         <fieldset>
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox" id="genderIsFemale" name="genderIsFemale"> Female
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="age">Age</label>
+                <div class="controls">
+                    <input type="text" id="age" name="age" value="" class="input input-mini" maxlength="200" autocomplete="off" autocapitalize="off">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="notes">Notes</label>
+                <div class="controls">
+                    <textarea rows="3" class="input-xlarge" id="notes" name="notes" maxlength="2000"></textarea>
+                </div>
+            </div>
+      <fieldset>
+
+        <fieldset>
             <legend>Your Account</legend>
             <div class="control-group">
                 <label class="control-label" for="username">Username</label>
@@ -55,7 +80,7 @@
                 <label class="control-label" for="userName">Password</label>
                 <div class="controls">
                     <input id="password" name="password" classname="input input-medium" type="password" data-original-title="Password must be completed.">
-                    <p class="help-block">Must be six characters or more. At least one upper case letter, one number and one symbol. </p>
+                    <p class="help-block">For security reasons password please use at least one upper case letter, one number and one symbol. </p>
                 </div>
             </div>
             <div class="control-group">

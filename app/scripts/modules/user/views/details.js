@@ -21,10 +21,10 @@ function(BaseView, template) {
             'input#lastName'    : 'lastName',
             'input#phoneNumber' : 'phoneNumber',
             'input#username'    : 'username',
-            'input#password'    : 'password'
-            // 'input#age'         : 'age',
-            // 'input#gender'      : 'gender',
-            // 'textarea#note'     : 'note'
+            'input#password'    : 'password',
+            'input#age'         : 'age',
+            'input#gender'      : 'gender',
+            'textarea#note'     : 'note'
         },
 
         initialize: function() {
@@ -57,6 +57,10 @@ function(BaseView, template) {
                     });
                 }
             }
+        },
+
+        showSuccesScreen: function(){
+            this.$('.alert-success').fadeIn();
         }
 
     });
