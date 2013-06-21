@@ -14,7 +14,8 @@ function(Backbone, User) {
             "user/profile"  : "profile",
             "user/login"    : "login",
             "titles"        : "titles",
-            "titles/:id"    : "titles"
+            "titles/:id"    : "titles",
+            "*default"      : "home"
         },
 
         checkForAuthorisation: function(){
