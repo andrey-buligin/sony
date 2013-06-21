@@ -38,6 +38,10 @@ function (Backbone) {
                 dataType: "json",
                 success: function(data, status, jqXHR) {
                     self.set(data);
+                    sessionStorage.setItem("sessionId", data.sessionId);
+                    sessionStorage.setItem("userId", data.userId);
+                    app.session.currentUser = self;
+                    app.session.expires = data.expiryTime;
                     if (_.isFunction(params.successCallback)) {
                         params.successCallback(data, status, jqXHR);
                     }

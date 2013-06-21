@@ -4,10 +4,10 @@ require([
 
 function ($) {
 
-	"use strict";
+    "use strict";
 
-	// setting up ajax calls.
-	$.ajaxSetup({
+    // setting up ajax calls.
+    $.ajaxSetup({
         statusCode: {
             404: function(){
                 window.location.replace('/#user/login');
@@ -17,11 +17,11 @@ function ($) {
             }
         },
         beforeSend : function(jqXHR, request) {
-        	var sessionId = sessionStorage.getItem("sessionId");
-        	console.log('before send', sessionId);
-	        if ( sessionId ) {
-	        	jqXHR.setRequestHeader('sessionId', sessionId);
-	        }
+            var sessionId = sessionStorage.getItem("sessionId");
+
+            if ( sessionId ) {
+                jqXHR.setRequestHeader('sessionId', sessionId);
+            }
         }
     });
 

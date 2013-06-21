@@ -38,9 +38,6 @@ function(template) {
         loginSuccess: function(data, status, jqXHR){
             var self = this;
 
-            sessionStorage.setItem("sessionId", data.sessionId);
-            app.session.currentUser = this.model;
-            app.session.expires = data.expiryTime;
             // using deferred because if error occurs in success callback it might break some script execution
             this.model.fetch().success(function(){
                 Backbone.history.navigate('/#', true);

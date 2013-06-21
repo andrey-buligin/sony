@@ -1,13 +1,13 @@
 define([
-	'backbone',
-	'scripts/modules/user/user'
+    'backbone',
+    'scripts/modules/user/user'
 ],
 
 function(Backbone, User) {
 
-	"use strict";
+    "use strict";
 
-	var Router = Backbone.Router.extend({
+    var Router = Backbone.Router.extend({
         routes: {
             ""              : "home",
             "user/register" : "register",
@@ -18,10 +18,13 @@ function(Backbone, User) {
         },
 
         checkForAuthorisation: function(){
-        	console.log('app.session.currentUser', app.session.currentUser);
-            if (!sessionStorage.getItem("sessionId") || !app.session.currentUser) {
+            if (!sessionStorage.getItem("sessionId") || !sessionStorage.getItem("userId")) {
                 Backbone.history.navigate('/user/login', true);
                 return false;
+            }
+            if (!app.session.currentUser) {
+                app.session.currentUser = new User.Models.Main({userId: sessionStorage.getItem("userId")});
+                app.session.currentUser.fetch();
             }
             return true;
         },
@@ -33,12 +36,12 @@ function(Backbone, User) {
         },
 
         login: function() {
-			var user = new User.Models.Main();
+            var user = new User.Models.Main();
             $('#content').empty().append(new User.Views.Signin({model: user}).render().el);
         },
 
         register: function() {
-			var userSignup = new User.Models.Register();
+            var userSignup = new User.Models.Register();
             $('#content').empty().append(new User.Views.Register({model: userSignup}).render().el);
         },
 
@@ -51,5 +54,5 @@ function(Backbone, User) {
         }
     });
 
-	return Router;
+    return Router;
 });
