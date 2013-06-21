@@ -1,8 +1,9 @@
 define([
-  'backbone'
+	'backbone',
+	'scripts/modules/user/user'
 ],
 
-function(Backbone) {
+function(Backbone, User) {
 
 	"use strict";
 
@@ -17,40 +18,38 @@ function(Backbone) {
         },
 
         checkForAuthorisation: function(){
-            if (!sessionStorage.getItem("sessionId")) {
-            	console.log('force login');
+        	console.log('app.session.currentUser', app.session.currentUser);
+            if (!sessionStorage.getItem("sessionId") || !app.session.currentUser) {
                 Backbone.history.navigate('/user/login', true);
+                return false;
             }
             return true;
         },
 
         home: function() {
             if (this.checkForAuthorisation()) {
-                console.log('homepage');
+                $('#content').empty().append(new User.Views.Welcome({model: app.session.currentUser}).render().el);
             }
         },
 
         login: function() {
-            require(['scripts/modules/user/user'], function(User) {
-                $('#content').empty().append(new User.Views.Signin().render().el);
-            });
+			var user = new User.Models.Main();
+            $('#content').empty().append(new User.Views.Signin({model: user}).render().el);
         },
 
         register: function() {
-            require(['scripts/modules/user/user'], function(User) {
-            	console.log('render user');
-                $('#content').empty().append(new User.Views.Register().render().el);
-            });
+			var userSignup = new User.Models.Register();
+            $('#content').empty().append(new User.Views.Register({model: userSignup}).render().el);
         },
 
         titles: function(id) {
             if (this.checkForAuthorisation()) {
                 require(['scripts/modules/titles/titles'], function(Titles) {
-                    console.log('titles page');
+                    alert('titles page to be completed');
                 });
             }
         }
     });
 
 	return Router;
-})
+});

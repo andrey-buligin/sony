@@ -1,17 +1,21 @@
 define([
-  'scripts/modules/user/views/signup',
-  'hbs!templates/user/details'
+  'hbs!templates/user/signup/main-template',
+  'hbs!templates/user/signup/success-template',
+  'backboneValidationBootstrap',
+  'backboneStickIt'
 ],
 
-function(BaseView, template) {
+function(template, successTpl, BackboneValidation) {
 
   "use strict";
 
-    var DetailsView = BaseView.extend({
+    var RegisterView = Backbone.View.extend({
 
         template: template,
+        className: 'signup-form',
+
         events : {
-            "click .btn-primary": "update"
+            "click .btn-primary": "register"
         },
 
         /**************************** MODEL-VIEW BINDINGS *******************************/
@@ -22,22 +26,34 @@ function(BaseView, template) {
             'input#phoneNumber' : 'phoneNumber',
             'input#username'    : 'username',
             'input#password'    : 'password'
-            // 'input#age'         : 'age',
-            // 'input#gender'      : 'gender',
-            // 'textarea#note'     : 'note'
         },
 
         initialize: function() {
-            _.bindAll(this, 'update');
-            BaseView.prototype.initialize.apply(this, _.toArray(arguments));
+            _.bindAll(this, 'register', 'showError', 'showSuccesScreen');
         },
 
         render: function(){
-            BaseView.prototype.render.call(this, this.options);
+            var self = this;
+
+            this.$el.html(this.template());
+            Backbone.Validation.bind(this, {
+                selector: 'id'
+            });
+            this.stickit();
+
+            this.model.on('change', function(){
+                self.model.validate();
+            });
+            this.model.on('validated:valid', function(){
+                if (self.passwordMatch()) {
+                    self.$('.alert-error').hide();
+                }
+            });
+
             return this;
         },
 
-        update: function (e) {
+        register: function (e) {
             var self = this;
 
             e.preventDefault();
@@ -57,9 +73,21 @@ function(BaseView, template) {
                     });
                 }
             }
+        },
+
+        passwordMatch: function() {
+            return this.$('#password').val() === this.$('#passwordConfirm').val();
+        },
+
+        showSuccesScreen: function(){
+            this.$el.html(successTpl(this.model.toJSON()));
+        },
+
+        showError: function(msg) {
+            this.$('.alert-error').text(msg).fadeIn();
         }
 
     });
 
-    return DetailsView;
+    return RegisterView;
 });

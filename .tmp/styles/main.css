@@ -9120,8 +9120,6 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
-  font-size: 62.5%;
-  line-height: 1.4em;
 }
 .form-signin {
   max-width: 300px;
@@ -9146,4 +9144,11 @@ body {
   height: auto;
   margin-bottom: 15px;
   padding: 7px 9px;
+}
+.alert-error {
+  text-transform: capitalize;
+}
+.signup-form {
+  width: 600px;
+  margin: 0 auto;
 }

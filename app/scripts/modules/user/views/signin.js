@@ -8,6 +8,10 @@ function(template) {
 
     var SignInView = Backbone.View.extend({
 
+        initialize: function() {
+            _.bindAll(this, "login", "loginSuccess", "loginError");
+        },
+
         render: function(){
             this.$el.html(template());
             return this;
@@ -16,24 +20,42 @@ function(template) {
         login: function (e) {
             e.preventDefault();
 
-            var email = $('#login-mail').val(),
-                password = $('#login-password').val();
+            var email = $.trim(this.$('#login').val()),
+                password = $.trim(this.$('#login-password').val());
 
-            $.ajax({
-                url: app.config.API_URL + '/signin/' + email + '/' + password,
-                type: 'POST',
-                dataType: "json",
-                success: function(data, status, jqXHR) {
-                    sessionStorage.setItem("sessionId", data);
-                    app.session.currentUser = data.userId;
-                    app.session.expires = data.expiryTime;
-                    Backbone.history.navigate('/', true);
-                },
-                error: function(data) {
-                    console.log(arguments);
-                    $('.alert-error').text(data.error.text).show();
-                }
+            if (email && password) {
+                this.model.login({
+                    email: email,
+                    password: password,
+                    successCallback: this.loginSuccess,
+                    errorCallback: this.loginError
+                });
+            } else {
+                this.showErrorMessage('Please check email and password');
+            }
+        },
+
+        loginSuccess: function(data, status, jqXHR){
+            var self = this;
+
+            sessionStorage.setItem("sessionId", data.sessionId);
+            app.session.currentUser = this.model;
+            app.session.expires = data.expiryTime;
+            // using deferred because if error occurs in success callback it might break some script execution
+            this.model.fetch().success(function(){
+                Backbone.history.navigate('/#', true);
+            }).error(function(data, status, errorMsg){
+                self.showErrorMessage('User data fail: ' + errorMsg);
             });
+        },
+
+        loginError: function(jqXHR, status, message) {
+            var response = $.parseJSON(jqXHR.responseText.replace('msg', '"msg"'));
+            this.showErrorMessage(response.msg);
+        },
+
+        showErrorMessage: function(message) {
+            $('.alert-error').text(message).show();
         },
 
         events : {

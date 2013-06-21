@@ -1,18 +1,26 @@
-define(function() {
+define([
+    'backbone'
+],
+
+function (Backbone) {
 
     "use strict";
 
     var Model = Backbone.Model.extend({
 
+        url: function() {
+            return app.config.API_URL + "/profile/" + this.id;
+        },
+
         idAttribute: "userId",
 
         defaults: {
             "firstName": "",
-            "lastName": "testuser",
-            "password": "password",
-            "username": "alexw",
-            "phoneNumber": "0777999666",
-            "age": 0,
+            "lastName": "",
+            "password": "",
+            "username": "",
+            "phoneNumber": "",
+            "age": 18,
             "genderIsFemale": false,
             "notes": null
         },
@@ -21,8 +29,21 @@ define(function() {
 
         },
 
-        filterSomething: function() {
+        login: function (params) {
+            var self = this;
 
+            $.ajax({
+                url: app.config.API_URL + '/signin/' + params.email + '/' + params.password,
+                type: 'GET',
+                dataType: "json",
+                success: function(data, status, jqXHR) {
+                    self.set(data);
+                    if (_.isFunction(params.successCallback)) {
+                        params.successCallback(data, status, jqXHR);
+                    }
+                },
+                error: params.errorCallback
+            });
         }
 
     });

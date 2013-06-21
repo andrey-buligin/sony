@@ -1,90 +1,56 @@
-//
-// ## models.user.signup
-//
-
 define([
-  'helpers/utils/namespace',
-  'helpers/mvc/model'
+    'backbone'
 ],
 
-function (app, ParentModel) {
+function (Backbone) {
 
-  "use strict";
+    "use strict";
 
-  var Model = ParentModel.extend({
+    var Model = Backbone.Model.extend({
 
-    locale : 'user',
+        idAttribute: "username",
 
-    // the actual model that's being used for comunication with the server
-    modelSchema : {
-      'firstName':          'string',
-      'lastName':           'string',
-      'email':              'string',
-      'userName':           'string',
-      'password':           'string',
-      'passwordConfirm':    'string'
-    },
+        defaults: {
+            "firstName"     : "",
+            "lastName"      : "",
+            "phoneNumber"   : "",
+            "password"      : "",
+            "username"      : ""
+        },
 
-    validationRules : {
-      'firstName': [{
-        rule         : 'notEmpty',
-        errorMessage : 'notEmpty'
-      },{
-        rule         : 'max100Rule',
-        errorMessage : 'max100'
-      }],
+        validation: {
+            username: {
+                required: true,
+                msg: 'Please enter username'
+            },
+            password: {
+                required: true,
+                msg: 'Please enter password'
+            },
+            firstName: {
+                required: true,
+                msg: 'Please enter first name'
+            },
+            lastName: {
+                required: true,
+                msg: 'Please enter last name'
+            },
+            phoneNumber: [{
+                required: true,
+                msg: 'Please provide your phone'
+            },{
+                pattern: 'digits',
+                msg: 'Phone number provided is not correct'
+            }]
+        },
 
-      'lastName': [{
-        rule         : 'notEmpty',
-        errorMessage : 'notEmpty'
-      },{
-        rule         : 'max100Rule',
-        errorMessage : 'max100'
-      }],
+        save: function() {
+            this.url = app.config.API_URL + "/register/" + this.get('username');
+            return Backbone.Model.prototype.save.apply(this, _.toArray(arguments));
+        }
 
-      'email': [{
-        rule         : 'notEmpty',
-        errorMessage : 'notEmpty'
-      },{
-        rule         : 'email',
-        errorMessage : 'invalidFormat'
-      }],
+    });
 
-      'userName': [{
-        rule         : 'notEmpty',
-        errorMessage : 'notEmpty'
-      },{
-        rule         : 'max100Rule',
-        errorMessage : 'max100'
-      }],
-
-      'password': [{
-        rule         : 'notEmpty',
-        errorMessage : 'notEmpty'
-      },{
-        rule         : 'min5',
-        errorMessage : 'min5'
-      },{
-        rule         : 'password',
-        errorMessage : 'invalidFormat'
-      }],
-
-      'passwordConfirm': [{
-        rule         : 'notEmpty',
-        errorMessage : 'notEmpty'
-      },{
-        rule         : 'min5',
-        errorMessage : 'min5'
-      },{
-        rule         : 'password',
-        errorMessage : 'invalidFormat'
-      }],
-    },
-
-    url: 'security/register'
-  });
-
-
-  return Model;
+    return Model;
 
 });
