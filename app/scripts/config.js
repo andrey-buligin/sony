@@ -20,6 +20,7 @@ function ($) {
         beforeSend : function(jqXHR, request) {
             var sessionId = sessionStorage.getItem("sessionId");
 
+            jqXHR.setRequestHeader('Content-type', 'application/json');
             if ( sessionId ) {
                 jqXHR.setRequestHeader('sessionId', sessionId);
             }
