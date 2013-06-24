@@ -8,6 +8,7 @@ function ($) {
 
     // setting up ajax calls.
     $.ajaxSetup({
+        contentType: 'application/json',
         statusCode: {
             404: function(){
                 window.location.replace('/#user/login');
